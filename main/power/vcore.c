@@ -89,9 +89,11 @@ esp_err_t VCORE_init(GlobalState * GLOBAL_STATE) {
                 if (barrel_jack_plugged_in == 1 || GLOBAL_STATE->board_version != 204) {
                     // turn ASIC on
                     gpio_set_level(GPIO_ASIC_ENABLE, 0);
+                    ESP_LOGI(TAG, "pwren_on");
                 } else {
                     // turn ASIC off
                     gpio_set_level(GPIO_ASIC_ENABLE, 1);
+                    ESP_LOGI(TAG, "pwren_off");
                 }
 			}
             break;

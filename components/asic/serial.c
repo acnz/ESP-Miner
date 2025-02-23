@@ -10,6 +10,7 @@
 #include "soc/uart_struct.h"
 
 #include "bm1397.h"
+#include "bm1366.h"
 #include "bm1368.h"
 #include "serial.h"
 #include "utils.h"
@@ -40,7 +41,8 @@ esp_err_t SERIAL_init(void)
     // Install UART driver (we don't need an event queue here)
     // tx buffer 0 so the tx time doesn't overlap with the job wait time
     //  by returning before the job is written
-    return uart_driver_install(UART_NUM_1, BUF_SIZE * 2, BUF_SIZE * 2, 0, NULL, 0);
+    esp_err_t ret = uart_driver_install(UART_NUM_1, BUF_SIZE * 2, BUF_SIZE * 2, 0, NULL, 0);
+    return ret;
 }
 
 esp_err_t SERIAL_set_baud(int baud)
@@ -82,6 +84,8 @@ int16_t SERIAL_rx(uint8_t *buf, uint16_t size, uint16_t timeout_ms)
         printf("rx: ");
         prettyHex((unsigned char*) buf, bytes_read);
         printf(" [%d]\n", buff_len);
+    }else{
+        printf("rx: error");
     }
     #endif
 

@@ -221,6 +221,7 @@ esp_err_t test_voltage_regulator(GlobalState * GLOBAL_STATE) {
             // turn ASIC on
             gpio_set_direction(GPIO_ASIC_ENABLE, GPIO_MODE_OUTPUT);
             gpio_set_level(GPIO_ASIC_ENABLE, 0);
+            ESP_LOGI(TAG, "pwren_on");
             break;
         case DEVICE_GAMMA:
         default:

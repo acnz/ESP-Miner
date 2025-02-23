@@ -11,6 +11,8 @@
 #define GAMMA_POWER_OFFSET 5 //Watts
 #define GAMMATURBO_POWER_OFFSET 5 //Watts
 
+static const char *TAG = "power.c";
+
 esp_err_t Power_disable(GlobalState * GLOBAL_STATE) {
 
     switch (GLOBAL_STATE->device_model) {
@@ -22,6 +24,8 @@ esp_err_t Power_disable(GlobalState * GLOBAL_STATE) {
                 VCORE_set_voltage(0.0, GLOBAL_STATE);
             } else if (GLOBAL_STATE->board_version == 202 || GLOBAL_STATE->board_version == 203 || GLOBAL_STATE->board_version == 204) {
                 gpio_set_level(GPIO_ASIC_ENABLE, 1);
+                ESP_LOGI(TAG, "pwren_off");
+                
             }
             break;
         case DEVICE_GAMMA:
